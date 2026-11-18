@@ -8,7 +8,6 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import {
-  BookOpen,
   FileCheck2,
   Layers,
   Link2,
@@ -17,7 +16,6 @@ import {
   Wallet,
 } from 'lucide-react';
 import { apiClient, WorkspaceStateResponse } from './client/services/apiClient';
-import { InteractiveDemoView } from './client/components/InteractiveDemoView';
 import { StudentWalletView } from './client/components/StudentWalletView';
 import { IssuerPortalView } from './client/components/IssuerPortalView';
 import { VerifierPortalView } from './client/components/VerifierPortalView';
@@ -31,7 +29,6 @@ import {
 
 export type ActiveTab =
   | 'wallet'
-  | 'demo'
   | 'issuer'
   | 'verifier'
   | 'blockchain'
@@ -48,12 +45,6 @@ const NAV_ITEMS: {
     label: 'Student Wallet',
     breadcrumb: 'Holder / Student Identity & Wallet',
     icon: Wallet,
-  },
-  {
-    id: 'demo',
-    label: 'Overview & Demo',
-    breadcrumb: 'Architecture / Interactive Walkthrough',
-    icon: BookOpen,
   },
   {
     id: 'issuer',
@@ -89,7 +80,6 @@ export default function App() {
   const [error, setError] = useState<string | null>(null);
   const [preselectedVp, setPreselectedVp] =
     useState<VerifiablePresentation | null>(null);
-  const [autoPlayVideoSignal, setAutoPlayVideoSignal] = useState<number>(0);
 
   const loadWorkspaceState = useCallback(
     async (overrideUserId?: string) => {
@@ -162,16 +152,6 @@ export default function App() {
   ) => {
     setPreselectedVp(vp);
     await handleSwitchTabWithRoleSync('verifier');
-  };
-
-  const handleWatchWorkflowVideo = () => {
-    setActiveTab('demo');
-    setAutoPlayVideoSignal((n) => n + 1);
-    window.setTimeout(() => {
-      document
-        .getElementById('workflow-video-player')
-        ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 80);
   };
 
   const pendingRequestCount = workspace
@@ -436,20 +416,6 @@ export default function App() {
           ) : (
             workspace && (
               <div key={activeTab} className="animate-view-enter">
-                {activeTab === 'demo' && (
-                  <InteractiveDemoView
-                    users={workspace.users}
-                    trustedIssuers={workspace.trustedIssuers}
-                    credentials={workspace.credentials}
-                    presentations={workspace.presentations}
-                    testDatasetCases={workspace.testDatasetCases}
-                    ethereumRpcOnline={workspace.ethereumRpcOnline}
-                    autoPlayVideoSignal={autoPlayVideoSignal}
-                    onRefresh={() => loadWorkspaceState()}
-                    onNavigateTab={(tab) => handleSwitchTabWithRoleSync(tab)}
-                  />
-                )}
-
                 {activeTab === 'wallet' && (
                   <StudentWalletView
                     activeUser={workspace.activeUser}
@@ -464,7 +430,6 @@ export default function App() {
                     onNavigateToVerifierWithPresentation={
                       handleNavigateToVerifierWithPresentation
                     }
-                    onWatchWorkflowVideo={handleWatchWorkflowVideo}
                   />
                 )}
 

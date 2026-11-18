@@ -88,17 +88,6 @@ export const ArchitectureAuditView: React.FC<ArchitectureAuditViewProps> = ({
             Every functional requirement and acceptance criterion from the Software Requirements Specification maps directly to an isolated module in this codebase.
           </p>
         </div>
-
-        <div className="flex items-center gap-3 shrink-0">
-          <a
-            href="/assets/aistudio/did_srs_cc9b6655.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center min-h-[42px] px-4 py-2 text-[13px] font-semibold text-slate-800 bg-white hover:bg-slate-50 border border-slate-300 rounded-lg transition-colors w-full sm:w-auto whitespace-nowrap"
-          >
-            Open Original SRS PDF ↗
-          </a>
-        </div>
       </section>
 
       {/* Modular Structure & GitHub Sync */}
@@ -159,9 +148,6 @@ git remote add origin https://github.com/<user>/did-system.git
 git branch -M main
 git push -u origin main`}
           </pre>
-          <p className="text-[13px] text-slate-600 leading-relaxed">
-            You can also export directly to GitHub using the <strong>Export to GitHub</strong> action in the top-right AI Studio toolbar.
-          </p>
         </div>
       </div>
 

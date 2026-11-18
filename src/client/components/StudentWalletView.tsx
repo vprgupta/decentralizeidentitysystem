@@ -7,7 +7,6 @@
  */
 
 import React, { useState } from 'react';
-import { Play } from 'lucide-react';
 import {
   DIDReferenceRecord,
   PresentationRequest,
@@ -35,7 +34,6 @@ interface StudentWalletViewProps {
   onSelectUser: (userId: string) => void;
   onRefresh: () => Promise<void>;
   onNavigateToVerifierWithPresentation: (vp: VerifiablePresentation) => void;
-  onWatchWorkflowVideo?: () => void;
 }
 
 const CLAIM_LABELS: Record<keyof StudentCredentialClaims, string> = {
@@ -66,7 +64,6 @@ export const StudentWalletView: React.FC<StudentWalletViewProps> = ({
   onSelectUser,
   onRefresh,
   onNavigateToVerifierWithPresentation,
-  onWatchWorkflowVideo,
 }) => {
   const studentUsers = allUsers.filter((u) => u.role === UserRole.STUDENT_HOLDER);
   const currentStudent =
@@ -444,18 +441,6 @@ export const StudentWalletView: React.FC<StudentWalletViewProps> = ({
             >
               {showRegisterModal ? 'Cancel' : '+ Add Profile'}
             </button>
-
-            {onWatchWorkflowVideo && (
-              <button
-                type="button"
-                data-testid="btn-watch-workflow-video"
-                onClick={onWatchWorkflowVideo}
-                className="min-h-[40px] px-4 inline-flex items-center justify-center gap-1.5 text-[13.5px] font-semibold text-blue-700 bg-blue-50/80 hover:bg-blue-100/80 border border-blue-200 rounded-lg transition-colors cursor-pointer shrink-0 whitespace-nowrap"
-              >
-                <Play className="w-3.5 h-3.5" />
-                <span>Watch Video Guide</span>
-              </button>
-            )}
           </div>
         </div>
 

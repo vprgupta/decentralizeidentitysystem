@@ -1,6 +1,0 @@
-{
-  "name": "Decentralized Identity (DID) System",
-  "description": "Academic web application prototype for user-controlled decentralized identity, verifiable university student credentials, selective disclosure, and Ethereum test-network verification.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}
